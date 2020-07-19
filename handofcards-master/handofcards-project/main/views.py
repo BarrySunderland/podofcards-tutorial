@@ -2,6 +2,8 @@ from django.shortcuts import render
 import requests
 import os
 from django.core.exceptions import ImproperlyConfigured
+from .models import Hand
+import datetime
 
 
 def hand(request):
@@ -28,5 +30,9 @@ def hand(request):
     for i in hand:
         total = total + i.get("value")
 
+    handTotal = Hand()
+    handTotal.total = total
+    handTotal.created = datetime.datetime.now()
+    handTotal.save()
+
     return render(request, 'main/index.html', {'array': hand, 'total': total})
-    

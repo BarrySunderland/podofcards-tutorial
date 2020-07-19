@@ -1,10 +1,22 @@
 from django.shortcuts import render
 import requests
+import os
+from django.core.exceptions import ImproperlyConfigured
 
 
 def hand(request):
 
-    response = requests.get('http://127.0.0.1:7000/deck/')
+    def get_env_value(env_variable):
+        try:
+            return os.environ[env_variable]
+        except KeyError:
+            error_msg = 'Set the {} environment variable'.format(env_variable)
+            raise ImproperlyConfigured(error_msg)
+
+    # Get environmant variable DECKOFCARDS_URL
+    DECKOFCARDS_URL = get_env_value('DECKOFCARDS_URL')
+
+    response = requests.get(DECKOFCARDS_URL)
     deckdata = response.json()
 
     hand = []

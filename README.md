@@ -14,6 +14,13 @@ _https://www.richardwalker.dev/django-dev.html_
 
 _https://www.richardwalker.dev/django-podman.html_
 
+
+create a pod named cardpod with ports 8000, 7000 & 5432 mapped to the host machine
+
+	podman pod create -p 8000 -p 7000 -p 5432 -n cardpod
+
+
+
 ## part 4: Django, PostgreSQL & Podman
 
 _https://www.richardwalker.dev/podman-postgres.html_
